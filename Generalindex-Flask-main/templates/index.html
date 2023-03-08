@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+</head>
+<style>
+    .searchbar{
+        margin-top: 50px;
+        width: 100%;
+    }
+
+    .bar{
+        border-radius: 40px;
+        box-shadow: 2px 3px 0px -2px #ccc;
+        padding:10px;
+        border:0px;
+        outline: none;
+        border-top: 1px solid #ccc;
+        border-left: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+        border-bottom: 1px solid #CCC;
+        width: 500px;
+    }
+
+    .bar:hover{
+        box-shadow: 3px 6px 7px -3px #ccc;
+    }
+
+    .bar:focus {
+        box-shadow: 3px 6px 7px -3px #ccc;
+    }
+
+    .search-title {
+        font-size: 100px;
+        margin-top: 150px;
+    }
+
+    .topbanner {
+        background: url("https://wallpapers.com/images/featured-full/4k-minimalist-ysuq5pgxv6mpjszl.jpg");
+    }
+</style>
+
+<body class="topbanner">
+    <div class="text-center">
+        <h1 class="search-title">General Index</h1>
+    </div>
+    <form action="/search" method="POST">
+        <div class="selection", align="center">
+            <label>Search within</label>
+            <select name="type">
+                <option value ="title">Title</option>
+                <option value ="author">Author</option>
+                <option value ="doi">Doi</option>
+ 		<option value = "journal">Journal</option>
+                <option value="keywords">Ngram/Keywords</option>
+            </select>
+
+            <label>Publish from</label>
+            <select name="start" id="start" onchange="chooseYear1()">
+                <option value="all_start_year">all year</option>
+                <option value="start_year">1960</option>
+            </select>
+
+            <label>to</label>
+            <select name="end" id="end" onchange="chooseYear2()">
+                <option value="all_end_year">all year</option>
+                <option value="end_year">1960</option>
+            </select>
+
+                 <script type="text/javascript">
+                  var date = new Date();
+                  var y = date.getFullYear()
+                  function chooseYear1() {
+                   for (let i = 1960; i<=y; i ++) {
+                    let start = document.getElementById("start");
+                    let year = Number(start.lastElementChild.innerHTML) + 1;
+                    var myOption = document.createElement("option");
+                    myOption.innerHTML = year;
+                    start.appendChild(myOption);
+                   }
+                  }
+                  chooseYear1();
+                  function chooseYear2() {
+                   for (let i = 1960; i<=y; i ++) {
+                    let start = document.getElementById("end");
+                    let year = Number(start.lastElementChild.innerHTML) + 1;
+                    var myOption = document.createElement("option");
+                    myOption.innerHTML = year;
+                    start.appendChild(myOption);
+                   }
+                  }
+                  chooseYear2();
+                  </script>
+           
+        </div>
+        <div class="searchbar", align="center">
+            <input name="query" type="text submit" placeholder="Search the paper" class="bar" required>
+        </div>
+    </form>
+    </body>
+
+</html>
